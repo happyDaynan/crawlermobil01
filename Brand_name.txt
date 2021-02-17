@@ -1,0 +1,7 @@
+{
+    "jp":{"honda": "261","infiniti":"449","lexus":"346","mazda":"276","mitsubishi":"262","nissan":"263","subaru":"336","suzuki":"277","toyota":"264"},
+    "tw":{"luxgen": "444"},
+    "kr":{"hyundai": "585", "kia": "691"},
+    "us":{"ford": "260", "gm":"616", "tesla":"741"},
+    "de":{"audi":"606", "bmw":"275", "benz":"303", "opel":"369", "porsche":"608", "skoda":"623", "volkswagen":"609"}
+}

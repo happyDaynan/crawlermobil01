@@ -1,0 +1,4 @@
+{
+    "mysql":["root", "2020aiot","localhost:3306","car"],
+    "mongodb":["root", "2020aiot", "localhost:27017","mobile01", "article"]
+}
