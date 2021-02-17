@@ -55,9 +55,9 @@ for url in url_list:
     re_articleBody = re.sub(r'[\n\r]+', '', re_articleBody, flags=re.MULTILINE)
     # 取出中文及英文
     re_articleBody = "".join(i for i in re.findall(r'[\u4e00-\u9fa5\w]+', re_articleBody))
-    
 
-    # 一篇文章整理成一篇字典
+
+    # 一篇文章整理成一字典
     article_dict = {
         'title': title,
         'article_time': article_time,

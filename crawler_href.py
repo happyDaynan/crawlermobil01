@@ -70,7 +70,8 @@ with open(conn_path, 'r') as f:
 engine = create_engine(f"mysql+pymysql://{a['mysql'][0]}:{a['mysql'][1]}@{a['mysql'][2]}/{a['mysql'][3]}")
 cnx = engine.connect()
 df.to_sql("brand_href", cnx, index=False, if_exists="append")
-cnx.close()
+
+
 
     
 
