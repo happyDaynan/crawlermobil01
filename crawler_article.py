@@ -5,9 +5,6 @@ from fake_useragent import UserAgent
 from pymongo import MongoClient
 
 
-
-
-
 conn_path = "./conn_info.txt"
 with open(conn_path, 'r') as f:
     a = json.loads(f.read())
@@ -37,20 +34,19 @@ for url in url_list:
     soup =  BeautifulSoup(res.text, 'lxml')
     # 文章標題
     title = soup.find_all("h1", class_="t2")[0].text
-    
     re_title = "".join(i for i in re.findall(r'[\u4e00-\u9fa5\w]+', title))
     title = re_title
 
     # 發文時間
     article_time = soup.find_all("span", class_="o-fNotes o-fSubMini")[0].text
+
     # 瀏覽人數
     visitors = soup.find_all("span", class_="o-fNotes o-fSubMini")[1].text
-    # print(visitors)
+ 
     # 讚數
     likes = soup.find_all("span", class_="o-fSubMini")[6].text
 
     # 針對文章內容作處理
-    
     # 文章內容
     articleBody = soup.find_all("div", class_= "u-gapNextV--md")[0].text
     # 拿掉網址
@@ -59,6 +55,7 @@ for url in url_list:
     re_articleBody = re.sub(r'[\n\r]+', '', re_articleBody, flags=re.MULTILINE)
     # 取出中文及英文
     re_articleBody = "".join(i for i in re.findall(r'[\u4e00-\u9fa5\w]+', re_articleBody))
+    
 
     # 一篇文章整理成一篇字典
     article_dict = {
@@ -70,15 +67,18 @@ for url in url_list:
         'url' : url
     }
     dict_list.append(article_dict)
+
     if len(dict_list) == 100:
+        # 建立連線
         # mongodb://users:password@your_ip/db_name.collection_name
-        conn = MongoClient(f"mongodb://{a['mongodb'][0]}:{a['mongodb'][1]}@{a['mongodb'][2]}")
-        db = conn[f"{a['mongodb'][3]}"]
-        collection = db[f"{a['mongodb'][4]}"]
-        collection.insert_many(dict_list)      
-        
-        print(len(dict_list), "insert")
-        dict_list = []
+        client = MongoClient(f"mongodb://{a['mongodb'][0]}:{a['mongodb'][1]}@{a['mongodb'][2]}")
+        if f"{a['mongodb'][3]}" in client.list_database_names():
+            print(f"db exitsts {a['mongodb'][3]}")
+            db = client[f"{a['mongodb'][3]}"]
+            collection = db[f"{a['mongodb'][4]}"]
+            collection.insert_many(dict_list)     
+            print(len(dict_list), "insert")
+            dict_list = []
     else:
         pass
         #　print(len(dict_list)) 
