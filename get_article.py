@@ -1,4 +1,5 @@
 from pymongo import MongoClient
+from elasticsearch import Elasticsearch
 from datetime import datetime
 import json, os, jieba
 
@@ -36,6 +37,9 @@ for x in collection.find():
     reg_article = " ".join(jieba.cut(x['articleBody'], cut_all=False, HMM=True))
     
     
+
+
+
 
 
 
