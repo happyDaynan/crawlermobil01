@@ -23,6 +23,7 @@ db = client[f"{a['mongodb'][3]}"]
 collection = db[f"{a['mongodb'][4]}"]
 
 for x in collection.find():
+
     brand_num = x['url'].split('f=')[1].split('&')[0]
     # 品牌代碼轉換
     for c in car_num:
@@ -35,6 +36,8 @@ for x in collection.find():
     now_time = datetime.now()
     # 針對文章內容做斷字斷詞
     reg_article = " ".join(jieba.cut(x['articleBody'], cut_all=False, HMM=True))
+
+
     
     
 
