@@ -47,7 +47,7 @@ for x in collection.find():
     reg_article = jieba.cut(x['articleBody'], cut_all=False, HMM=True)
     reg_article = " ".join(filter(lambda a: a not in stop_words, reg_article))
     car_article["article"] = [reg_article]
-
+    
     es = Elasticsearch("localhost", port=9200)
     
     es.index(index='car_1', body= car_article)
