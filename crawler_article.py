@@ -83,11 +83,10 @@ for url in url_list:
             f"mongodb://{a['mongodb'][0]}:{a['mongodb'][1]}@{a['mongodb'][2]}"
         )
         if f"{a['mongodb'][3]}" in client.list_database_names():
-            print(f"db exitsts {a['mongodb'][3]}")
+
             db = client[f"{a['mongodb'][3]}"]
             collection = db[f"{a['mongodb'][4]}"]
             collection.insert_many(dict_list)
-            print(len(dict_list), "insert")
             dict_list = []
     else:
         pass
