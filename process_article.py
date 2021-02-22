@@ -1,7 +1,10 @@
+import json
+import os 
+import jieba
 from pymongo import MongoClient
 from elasticsearch import Elasticsearch
 from datetime import datetime
-import json, os, jieba
+
 
 conn_path = "./conn_info.txt"
 with open(conn_path, 'r') as f:
@@ -44,13 +47,20 @@ for x in collection.find():
     car_article["now_time"]  = datetime.now()
     # 針對文章內容做斷字斷詞
     # reg_article = " ".join(jieba.cut(x['articleBody'], cut_all=False, HMM=True))
-    reg_article = jieba.cut(x['articleBody'], cut_all=False, HMM=True)
-    reg_article = " ".join(filter(lambda a: a not in stop_words, reg_article))
-    car_article["article"] = [reg_article]
+    reg_article = jieba.lcut(x['articleBody'], cut_all=False, HMM=True)
+    a = list()
+    for i in reg_article:
+        if i not in stop_words:
+            a.append(i)
+    # print(a)    
+
+    # reg_article = " ".join(filter(lambda a: a not in stop_words, reg_article))
+    car_article["article"] = a
+    
     
     es = Elasticsearch("localhost", port=9200)
     
-    es.index(index='car_1', body= car_article)
+    es.index(index='car_article', body= car_article)
         
 
 

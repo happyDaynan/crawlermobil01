@@ -1,4 +1,5 @@
 {
     "git.ignoreLimitWarning": true,
-    "python.pythonPath": "C:\\Users\\nan\\AppData\\Local\\Programs\\Python\\Python37\\python.exe"
+    "python.pythonPath": "C:\\Users\\nan\\AppData\\Local\\Programs\\Python\\Python37\\python.exe",
+    "python.formatting.provider": "autopep8"
 }

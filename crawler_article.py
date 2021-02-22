@@ -1,5 +1,9 @@
+import requests 
+import os 
+import json
+import collections
+import re
 from sqlalchemy import create_engine
-import requests, os, json, collections, re
 from bs4 import BeautifulSoup
 from fake_useragent import UserAgent
 from pymongo import MongoClient
